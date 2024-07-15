@@ -4,7 +4,7 @@ import { ListaComponent } from "./lista/lista.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 
 export const HOME_ROUTES: Routes = [
-    { path: '', component: DashboardComponent },
     { path: 'cuadro', component: CuadroComponent },
-    { path: 'lista', component: ListaComponent }
+    { path: 'lista', component: ListaComponent },
+    { path: '', component: DashboardComponent }
 ];
