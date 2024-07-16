@@ -1,6 +1,18 @@
-<a href="#" class="group">
-    <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-      <img src="{{ elemento.image }}" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="h-full w-full object-cover object-center group-hover:opacity-75">
-      <div>{{ elemento.name }}</div>
+<a  class="group">
+  <div (click)="toggleFlip()" [@flipState]="flip">
+    <div *ngIf="info && info.sprites" class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7" [style.background]="gradientStyle">
+      <img src="{{ info.sprites.front_default }}" alt="" class="h-full w-full object-cover object-center group-hover:opacity-75">
+      <div class="text-[36px] text-white font-black uppercase pl-[6px] group-hover:text-gray-500">{{ info.name }}</div>
     </div>
-  </a>
+    <div class="tp-box__side tp-box__back">asdasd</div>
+  </div>
+</a>
+
+<div class="tp-wrapper">
+	<div class="tp-box" (click)="toggleFlip()" [@flipState]="flip">
+		<div class="tp-box__side tp-box__front">Front
+		</div>
+		<div class="tp-box__side tp-box__back">Back
+		</div>
+	</div>
+</div>

@@ -22,9 +22,7 @@ export class MosaicoComponent implements OnInit {
 
   getDataFromApi():void {
     this.productosService.getData().subscribe((data) => {
-      this.elementos = data;
-      this.ejemplo = this.elementos[0].id;
-      console.log(this.elementos);
+      this.elementos = data.results;
     })
   }
 
