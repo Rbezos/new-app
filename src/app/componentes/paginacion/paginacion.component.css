@@ -1,0 +1,29 @@
+.contenedor_paginacion {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.bloque_paginacion {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.elemento_paginacion {
+    padding: 7px 15px;
+    background: #1f293766;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.elemento_paginacion:hover {
+    background: #1f2937;
+}
+
+.elemento_paginacion.active {
+    background: #1f2937;
+}
