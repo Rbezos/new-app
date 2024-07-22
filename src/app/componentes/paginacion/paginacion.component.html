@@ -1,6 +1,6 @@
 <div class="contenedor_paginacion">
     <div class="bloque_paginacion">
-        <div (click)="cambiarPagina(1)" class="elemento_paginacion" *ngIf="pagina_actual != 1">...</div>
+        <div (click)="cambiarPagina(1)" class="elemento_paginacion" *ngIf="pagina_actual >= 4">...</div>
         <div 
         (click)="cambiarPagina(pagina)" 
         [ngClass]="{'active': pagina === pagina_actual}" 

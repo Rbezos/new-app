@@ -1,5 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { ProductosService } from '../../servicios/produtos/productos.service';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,24 +10,18 @@ import { CommonModule } from '@angular/common';
 })
 export class PaginacionComponent implements OnInit {
 
-  constructor(private productosService: ProductosService){}
   contador_paginas: number = 0;
   num_elementos: number = 12;
   num_paginas: number = 0;
   paginas: number[] = [];
   pagina_actual: number = 1;
 
+  @Input() elementos: any[] = [];
   @Output() pageChanged = new EventEmitter<{page: number, limit: number}>();
 
   ngOnInit(): void {
-    this.getDataFromApi();
-  }
-
-  getDataFromApi(): void {
-    this.productosService.getData(this.num_elementos*this.pagina_actual,this.num_elementos).subscribe((data) => {
-      this.num_paginas = Math.ceil(data.count / this.num_elementos);
-      this.generatePaginacion();
-    })
+    // this.num_paginas = Math.ceil(this.elementos.c / this.num_elementos);
+    this.generatePaginacion()
   }
 
   generatePaginacion(): void {
@@ -57,7 +50,6 @@ export class PaginacionComponent implements OnInit {
   }
   cambiarPagina(pagina: number): void {
     this.pagina_actual = pagina;
-    this.getDataFromApi();
     this.pageChanged.emit({page: this.pagina_actual, limit: this.num_elementos});
   }
 }

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CardComponent } from '../card/card.component';
-import { ProductosService } from '../../servicios/produtos/productos.service';
 import { CommonModule } from '@angular/common';
 import { PaginacionComponent } from '../paginacion/paginacion.component';
 
@@ -11,26 +10,25 @@ import { PaginacionComponent } from '../paginacion/paginacion.component';
   templateUrl: './mosaico.component.html',
   styleUrl: './mosaico.component.css'
 })
-export class MosaicoComponent implements OnInit {
+export class MosaicoComponent implements OnChanges{
 
-  elementos: any[] = [];
-  ejemplo: any;
-  constructor(private productosService: ProductosService){}
+  @Input() array: any[] = [];
 
-  ngOnInit(): void {
-    this.getDataFromApi();
+  public arrayPokemon: any[] = [];
+  public numPokemon: number = 0;
+  public elementos: any[] = [];
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['array']) {
+      if (this.array) {
+        console.log('Datos recibidos en el componente hijo:', this.array);
+      } else {
+        console.error('El array no está en el formato esperado:', this.array);
+      }
+    }
   }
 
   onPageChanged(event: {page: number, limit: number}) {
-    console.log(event);
-    this.getDataFromApi(event.page, event.limit);
+    // this.getDataFromApi(event.page, event.limit);
   }
-
-  getDataFromApi(page: number = 1, limit: number = 12):void {
-    console.log(page);
-    this.productosService.getData((page - 1) * limit, limit).subscribe((data) => {
-      this.elementos = data.results;
-    })
-  }
-
 }

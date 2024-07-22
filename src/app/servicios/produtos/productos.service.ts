@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { PokemonTypeColor } from '../../interfaces/type.interface';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,10 @@ import { PokemonTypeColor } from '../../interfaces/type.interface';
 export class ProductosService {
 
   private url = 'https://pokeapi.co/api/v2/pokemon/';
+
+  private arrayPokemons: any[] = [];
+  private cache = new Map<string, any>();
+  private numPokemons = new Map<number, number>();
 
   private typeColors: PokemonTypeColor[] = [
     { type: 'steel', color: 'LightGrey', border: 'Silver'},
@@ -33,8 +38,21 @@ export class ProductosService {
   constructor(private http: HttpClient) { }
 
   getData(offset: number, limit: number): Observable<any> {
-    const params = new HttpParams().set('offset', offset.toString()).set('limit', limit.toString());
-    return this.http.get<any>(this.url, { params });
+    const cacheKey = `${offset}-${limit}`;
+
+    if(this.cache.has(cacheKey)) {
+      return of(this.cache.get(cacheKey));
+    }
+
+    const params = new HttpParams()
+      .set('offset', offset.toString())
+      .set('limit', limit.toString());
+
+    return this.http.get<any>(this.url, { params }).pipe(
+      tap(data => {
+        this.cache.set(cacheKey, { data: data.results, numPokemons: data.count});
+      })
+    )
   }
 
   getProducts(url: string): Observable<any> {
