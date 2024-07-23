@@ -12,16 +12,17 @@ import { PaginacionComponent } from '../paginacion/paginacion.component';
 })
 export class MosaicoComponent implements OnChanges{
 
-  @Input() array: any[] = [];
+  @Input() array: any;
 
   public arrayPokemon: any[] = [];
   public numPokemon: number = 0;
   public elementos: any[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['array']) {
+    if (changes['array'] && this.array != undefined) {
       if (this.array) {
-        console.log('Datos recibidos en el componente hijo:', this.array);
+        this.elementos = this.array.results;
+        this.numPokemon = this.array.count;
       } else {
         console.error('El array no está en el formato esperado:', this.array);
       }
@@ -29,6 +30,6 @@ export class MosaicoComponent implements OnChanges{
   }
 
   onPageChanged(event: {page: number, limit: number}) {
-    // this.getDataFromApi(event.page, event.limit);
+    this.getDataFromApi(event.page, event.limit);
   }
 }

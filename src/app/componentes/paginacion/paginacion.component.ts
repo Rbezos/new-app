@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './paginacion.component.html',
   styleUrl: './paginacion.component.css'
 })
-export class PaginacionComponent implements OnInit {
+export class PaginacionComponent implements OnChanges {
 
   contador_paginas: number = 0;
   num_elementos: number = 12;
@@ -16,12 +16,19 @@ export class PaginacionComponent implements OnInit {
   paginas: number[] = [];
   pagina_actual: number = 1;
 
-  @Input() elementos: any[] = [];
+  @Input() numPokemon: any;
   @Output() pageChanged = new EventEmitter<{page: number, limit: number}>();
 
-  ngOnInit(): void {
-    // this.num_paginas = Math.ceil(this.elementos.c / this.num_elementos);
-    this.generatePaginacion()
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['numPokemon'] && this.numPokemon != undefined) {
+      if (this.numPokemon != 0) {
+        this.num_paginas = Math.ceil(this.numPokemon / this.num_elementos);
+        this.generatePaginacion();
+        console.log('Datos recibidos en el componente hijo:', this.numPokemon);
+      } else {
+        console.error('El array no está en el formato esperado:', this.numPokemon);
+      }
+    }
   }
 
   generatePaginacion(): void {

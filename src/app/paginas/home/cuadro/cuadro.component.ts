@@ -13,7 +13,7 @@ import { PaginacionComponent } from '../../../componentes/paginacion/paginacion.
 })
 export class CuadroComponent implements OnInit {
 
-  public data: any[] = [];
+  public data: any;
 
   constructor(private productosService: ProductosService){}
 

@@ -41,7 +41,10 @@ export class ProductosService {
     const cacheKey = `${offset}-${limit}`;
 
     if(this.cache.has(cacheKey)) {
+      console.log("entra");
       return of(this.cache.get(cacheKey));
+    } else {
+      console.log("no entra");
     }
 
     const params = new HttpParams()
