@@ -41,10 +41,7 @@ export class ProductosService {
     const cacheKey = `${offset}-${limit}`;
 
     if(this.cache.has(cacheKey)) {
-      console.log("entra");
       return of(this.cache.get(cacheKey));
-    } else {
-      console.log("no entra");
     }
 
     const params = new HttpParams()
@@ -53,7 +50,7 @@ export class ProductosService {
 
     return this.http.get<any>(this.url, { params }).pipe(
       tap(data => {
-        this.cache.set(cacheKey, { data: data.results, numPokemons: data.count});
+        this.cache.set(cacheKey, { results: data.results, numPokemon: data.count});
       })
     )
   }

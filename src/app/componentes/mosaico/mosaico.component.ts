@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CardComponent } from '../card/card.component';
 import { CommonModule } from '@angular/common';
 import { PaginacionComponent } from '../paginacion/paginacion.component';
@@ -27,9 +27,5 @@ export class MosaicoComponent implements OnChanges{
         console.error('El array no está en el formato esperado:', this.array);
       }
     }
-  }
-
-  onPageChanged(event: {page: number, limit: number}) {
-    this.getDataFromApi(event.page, event.limit);
   }
 }
