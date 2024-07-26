@@ -21,23 +21,13 @@ export class PaginacionComponent implements OnInit {
 
   constructor(private dataSharingService: DataSharingService) { }
 
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   if (changes['numPokemon'] && this.numPokemon != undefined) {
-  //     if (this.numPokemon != 0) {
-  //       this.num_paginas = Math.ceil(this.numPokemon / this.num_elementos);
-  //       this.generatePaginacion();
-  //       console.log('Datos recibidos en el componente hijo:', this.numPokemon);
-  //     } else {
-  //       console.error('El array no está en el formato esperado:', this.numPokemon);
-  //     }
-  //   }
-  // }
   ngOnInit(): void {
     this.num_paginas = Math.ceil(1302 / this.num_elementos);
     this.generatePaginacion();
   }
 
   generatePaginacion(): void {
+    console.log("dasdasd");
     this.paginas = [];
     
     this.pagina_actual = Math.max(1, Math.min(this.pagina_actual, this.num_paginas));
@@ -60,5 +50,6 @@ export class PaginacionComponent implements OnInit {
   cambiarPagina(pagina: number): void {
     this.pagina_actual = pagina;
     this.dataSharingService.changeData([this.pagina_actual, this.num_elementos]);
+    this.generatePaginacion();
   }
 }

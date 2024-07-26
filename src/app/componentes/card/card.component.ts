@@ -40,10 +40,13 @@ export class CardComponent implements OnInit {
     }
   }
 
+
+
   getInfoProduct(): void {
     this.productosService.getProducts(this.elemento.url).subscribe(
       data => {
         this.info = data;
+        console.log(this.info);
         if(this.info.types.length >= 1) {
           this.primaryColor = this.productosService.getColorByType(this.info.types[0].type.name);
         } else {
@@ -67,8 +70,5 @@ export class CardComponent implements OnInit {
 
   flip: string = 'inactive';
 
-  toggleFlip() {
-    this.flip = (this.flip == 'inactive') ? 'active' : 'inactive';
-  }
 
 }
