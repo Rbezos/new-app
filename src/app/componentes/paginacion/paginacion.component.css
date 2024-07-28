@@ -2,12 +2,16 @@
     display: flex;
     justify-content: center;
     margin-top: 50px;
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .bloque_paginacion {
     display: flex;
     justify-content: center;
     gap: 20px;
+    width: 80%;
 }
 
 .elemento_paginacion {
@@ -26,4 +30,14 @@
 
 .elemento_paginacion.active {
     background: #1f2937;
+}
+
+.cambio_vista{
+    width: 10%;
+    display: flex;
+    gap: 3px;
+}
+
+.filtros {
+    width: 10%;
 }

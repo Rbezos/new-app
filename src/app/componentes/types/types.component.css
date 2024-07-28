@@ -1,0 +1,14 @@
+.bloque_tipos {
+    display: flex;
+    gap: 5px;
+}
+
+.tipo {
+    border: 1px solid rgb(255, 255, 255);
+    padding: 1px 5px;
+    border-radius: 5px;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: 700;
+}

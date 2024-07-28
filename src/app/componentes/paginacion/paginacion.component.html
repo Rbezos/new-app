@@ -1,4 +1,5 @@
 <div class="contenedor_paginacion">
+    <div class="filtros">Filtros</div>
     <div class="bloque_paginacion">
         <div (click)="cambiarPagina(1)" class="elemento_paginacion" *ngIf="pagina_actual >= 4">...</div>
         <div 
@@ -7,5 +8,9 @@
         class="elemento_paginacion" 
         *ngFor="let pagina of paginas">{{ pagina }}</div>
         <div (click)="cambiarPagina(num_paginas)" class="elemento_paginacion" *ngIf="pagina_actual != num_paginas">...</div>
+    </div>
+    <div class="cambio_vista">
+        <div class="mosaico">Mosaico</div>
+        <div class="listado">Listado</div>
     </div>
 </div>

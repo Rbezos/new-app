@@ -1,12 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { ProductosService } from '../../servicios/produtos/productos.service';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { TypesComponent } from '../types/types.component';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TypesComponent],
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
   animations: [
@@ -23,13 +24,15 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   ]
 })
 export class CardComponent implements OnInit {
-
+  
   @Input() elemento: any;
+  @Output() tipos: any[] = [];
   info: any;
 
-  tipos: string[] = [];
   primaryColor: string = '';
   secondaryColor: string = '';
+  isHovered: boolean = false;
+
   constructor(private productosService: ProductosService) { }
 
   ngOnInit() {
@@ -40,20 +43,21 @@ export class CardComponent implements OnInit {
     }
   }
 
-
-
   getInfoProduct(): void {
     this.productosService.getProducts(this.elemento.url).subscribe(
       data => {
         this.info = data;
-        console.log(this.info);
         if(this.info.types.length >= 1) {
           this.primaryColor = this.productosService.getColorByType(this.info.types[0].type.name);
+          this.tipos[0] = this.info.types[0].type;
+          this.tipos[0]['color'] = this.primaryColor;
         } else {
           this.primaryColor = '#000000';
         }
         if (this.info.types.length >= 2) {
           this.secondaryColor = this.productosService.getColorByType(this.info.types[1].type.name);
+          this.tipos[1] = this.info.types[1].type;
+          this.tipos[1]['color'] = this.secondaryColor;
         } else {
           this.secondaryColor = this.primaryColor;
         }
@@ -68,7 +72,9 @@ export class CardComponent implements OnInit {
     return `linear-gradient(90deg, ${this.primaryColor} 0%, ${this.secondaryColor} 100%)`;
   }
 
-  flip: string = 'inactive';
+  toggleHover(state:boolean) {
+    this.isHovered = state;
+  }
 
 
 }

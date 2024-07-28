@@ -1,0 +1,5 @@
+<div class="bloque_tipos">
+    <div *ngFor="let tipo of tipos" class="tipo" [ngStyle]="{'background-color': tipo.color}">
+        {{ tipo.name }}
+    </div>
+</div>
