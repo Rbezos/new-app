@@ -18,6 +18,7 @@ export class PaginacionComponent implements OnInit {
   pagina_actual: number = 1;
 
   @Input() numPokemon: any;
+  @Output() vista = new EventEmitter<number>();
 
   constructor(private dataSharingService: DataSharingService) { }
 
@@ -27,7 +28,6 @@ export class PaginacionComponent implements OnInit {
   }
 
   generatePaginacion(): void {
-    console.log("dasdasd");
     this.paginas = [];
     
     this.pagina_actual = Math.max(1, Math.min(this.pagina_actual, this.num_paginas));
@@ -51,5 +51,9 @@ export class PaginacionComponent implements OnInit {
     this.pagina_actual = pagina;
     this.dataSharingService.changeData([this.pagina_actual, this.num_elementos]);
     this.generatePaginacion();
+  }
+
+  cambiarVista(vista:number) {
+    this.vista.emit(vista);
   }
 }

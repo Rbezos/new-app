@@ -10,7 +10,7 @@
         <div (click)="cambiarPagina(num_paginas)" class="elemento_paginacion" *ngIf="pagina_actual != num_paginas">...</div>
     </div>
     <div class="cambio_vista">
-        <div class="mosaico">Mosaico</div>
-        <div class="listado">Listado</div>
+        <div class="mosaico" (click)="cambiarVista(1)">Mosaico</div>
+        <div class="listado" (click)="cambiarVista(2)">Listado</div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,12 +8,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './types.component.html',
   styleUrl: './types.component.css'
 })
-export class TypesComponent implements OnInit {
+export class TypesComponent  {
 
   @Input() tipos: any[] = [];
-
-  ngOnInit(): void {
-    console.log(this.tipos);
-  }
 
 }

@@ -1,17 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { ProductosService } from '../../servicios/produtos/productos.service';
-import { CommonModule } from '@angular/common';
 import { TypesComponent } from '../types/types.component';
 
 @Component({
-  selector: 'app-card',
+  selector: 'app-listado',
   standalone: true,
   imports: [CommonModule, TypesComponent],
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css'],
+  templateUrl: './listado.component.html',
+  styleUrl: './listado.component.css'
 })
-export class CardComponent implements OnInit {
-  
+export class ListadoComponent implements OnInit {
+ 
   @Input() elemento: any;
   @Output() tipos: any[] = [];
   info: any;
@@ -19,7 +19,6 @@ export class CardComponent implements OnInit {
   primaryColor: string = '';
   secondaryColor: string = '';
   isHovered: boolean = false;
-
   constructor(private productosService: ProductosService) { }
 
   ngOnInit() {
@@ -54,14 +53,4 @@ export class CardComponent implements OnInit {
       }
     );
   }
-
-  get gradientStyle(): string {
-    return `linear-gradient(90deg, ${this.primaryColor} 0%, ${this.secondaryColor} 100%)`;
-  }
-
-  toggleHover(state:boolean) {
-    this.isHovered = state;
-  }
-
-
 }

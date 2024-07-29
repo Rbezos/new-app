@@ -28,7 +28,6 @@ export class CuadroComponent implements OnInit {
   getDataFromApi(page: number = 1, limit: number = 12):void {
     this.productosService.getData((page - 1) * limit, limit).subscribe((data) => {
       this.data = data;
-      console.log(this.data);
     })
   }
 

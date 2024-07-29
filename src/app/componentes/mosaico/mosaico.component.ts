@@ -2,17 +2,19 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CardComponent } from '../card/card.component';
 import { CommonModule } from '@angular/common';
 import { PaginacionComponent } from '../paginacion/paginacion.component';
+import { ListadoComponent } from '../listado/listado.component';
 
 @Component({
   selector: 'app-mosaico',
   standalone: true,
-  imports: [CardComponent, CommonModule, PaginacionComponent],
+  imports: [CardComponent, CommonModule, PaginacionComponent, ListadoComponent],
   templateUrl: './mosaico.component.html',
   styleUrl: './mosaico.component.css'
 })
 export class MosaicoComponent implements OnChanges{
 
   @Input() array: any;
+  vista: number = 2;
 
   public arrayPokemon: any[] = [];
   public numPokemon: number = 0;
@@ -27,5 +29,9 @@ export class MosaicoComponent implements OnChanges{
         console.error('El array no está en el formato esperado:', this.array);
       }
     }
+  }
+
+  cambiarVista(vista: any) {
+    this.vista = vista;
   }
 }
