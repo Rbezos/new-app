@@ -1,0 +1,16 @@
+.bloq_list{
+    margin: 5px 0px;
+    display: flex;
+    border-radius: 1px;
+    align-items: center;
+    border: 1px solid white;
+}
+
+.sprite {
+    border-right: 3px solid white;
+    padding: 0px 10px;
+}
+
+.bloque_nombre {
+    padding: 0px 20px;
+}
