@@ -1,19 +1,17 @@
 <div *ngIf="info && info.sprites" class="bloq_list" [style.background]="gradientStyle">
-    <div>
+    <div class="bloque_imagen">
         <img 
             *ngIf="!isHovered" 
             style="filter: drop-shadow(2px 4px 10px black);" 
             src="{{ info.sprites.front_default }}" 
             alt="" 
             class="sprite h-full w-full object-cover object-center group-hover:opacity-75">
-        </div>
-    <div class="bloque_nombre text-[36px] text-white font-black uppercase pl-[6px]">{{ info.name }}</div>
-    <div>
+    </div>
+    <div class="bloque_nombre text-[36px] text-white font-black uppercase pl-[6px]">
+        {{ info.name }}
         <app-types [tipos]="tipos"></app-types>
     </div>
-    <div>
-        <div>
-            <fa-icon [icon]="faCoffee"></fa-icon>
-        </div>
+    <div class="bloque_botones">        
+        <app-boton-group></app-boton-group>
     </div>
 </div>

@@ -3,23 +3,21 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { ProductosService } from '../../servicios/produtos/productos.service';
 import { TypesComponent } from '../types/types.component';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faInfo } from '@fortawesome/free-solid-svg-icons';
-import { faMap } from '@fortawesome/free-solid-svg-icons';
+import { BotonGroupComponent } from '../boton-group/boton-group.component';
 
 @Component({
   selector: 'app-listado',
   standalone: true,
-  imports: [CommonModule, TypesComponent, FontAwesomeModule],
+  imports: [CommonModule, TypesComponent, BotonGroupComponent],
   templateUrl: './listado.component.html',
   styleUrl: './listado.component.css'
 })
 export class ListadoComponent implements OnInit {
- 
+  info: any;
+
   @Input() elemento: any;
   @Output() tipos: any[] = [];
-  info: any;
-  faCoffee = faMap;
+  // @Output() info_item: any = this.info;
 
   public safeImageUrl: SafeUrl = "";
   

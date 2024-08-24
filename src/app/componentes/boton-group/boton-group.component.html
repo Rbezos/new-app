@@ -1,0 +1,13 @@
+<div class="bloque_group_boton">
+    <ng-container *ngFor="let icon of array_icons">
+        <div 
+            [ngClass]="{ 'hovered': icon.isHovered }"
+            class="boton" 
+            [style.background]="icon.color" 
+            (mouseenter)="botonHover(icon, true)"
+            (mouseleave)="botonHover(icon, false)"
+            >
+            <fa-icon [icon]="icon.name"></fa-icon>
+        </div>
+    </ng-container>
+</div>

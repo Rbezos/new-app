@@ -9,8 +9,23 @@
 .sprite {
     border-right: 3px solid white;
     padding: 0px 10px;
+    height: 60px;
 }
 
 .bloque_nombre {
     padding: 0px 20px;
+    width: 70%; 
+    display: flex; 
+    align-items: center;
+    gap: 10px
+}
+
+.bloque_imagen {
+    width: 10%;
+}
+
+.bloque_botones {
+    width: 20%;
+    justify-content: center;
+    display: flex;
 }

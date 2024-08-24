@@ -1,0 +1,22 @@
+.bloque_group_boton {
+    display: flex;
+    gap: 5px;
+}
+
+.boton {
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 3px;
+    padding: 5px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 2rem;
+    justify-content: center;
+}
+
+.boton.hovered {
+    font-size: 20px;
+    padding: 0px;
+    filter: drop-shadow(1px 1px 2px white);
+}
