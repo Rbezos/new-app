@@ -2,11 +2,12 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { ProductosService } from '../../servicios/produtos/productos.service';
 import { CommonModule } from '@angular/common';
 import { TypesComponent } from '../types/types.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [CommonModule, TypesComponent],
+  imports: [CommonModule, TypesComponent, RouterModule],
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
 })
@@ -19,11 +20,13 @@ export class CardComponent implements OnInit {
   primaryColor: string = '';
   secondaryColor: string = '';
   isHovered: boolean = false;
+  public id: number = 0;
 
   constructor(private productosService: ProductosService) { }
 
   ngOnInit() {
     if (this.elemento && this.elemento.url) {
+      this.id = this.elemento.url.split('/')[6]
       this.getInfoProduct();
     } else {
       console.error('Elemento o elemento.url no está definido');

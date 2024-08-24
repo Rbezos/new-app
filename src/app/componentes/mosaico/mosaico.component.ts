@@ -14,7 +14,7 @@ import { ListadoComponent } from '../listado/listado.component';
 export class MosaicoComponent implements OnChanges{
 
   @Input() array: any;
-  vista: number = 2;
+  vista: number = 1;
 
   public arrayPokemon: any[] = [];
   public numPokemon: number = 0;

@@ -1,5 +1,12 @@
 <a  class="group cursor-pointer">
-  <div *ngIf="info && info.sprites" (mouseenter)="toggleHover(true)" (mouseleave)="toggleHover(false)" class="card_container aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7" [style.background]="gradientStyle">
+  <div 
+    *ngIf="info && info.sprites" 
+    [routerLink]="'/pokemon/{{id}}'" 
+    (mouseenter)="toggleHover(true)" 
+    (mouseleave)="toggleHover(false)" 
+    class="card_container aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7" 
+    [style.background]="gradientStyle"
+  >
     <div class="tipo">
       <app-types [tipos]="tipos"></app-types>
     </div>

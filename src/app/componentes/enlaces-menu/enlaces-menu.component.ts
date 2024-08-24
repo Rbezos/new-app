@@ -15,14 +15,11 @@ export class EnlacesMenuComponent implements OnInit{
   currentRoute: string = '';
 
   public enlaces = [
-    {name: 'Dashboard', route: '/'},
-    {name: 'Cuadro', route: '/cuadro'},
-    {name: 'Listado', route: '/lista'},
-    {name: 'Web', route: '/web'},
+    {name: 'Pokedex', route: '/cuadro'}
   ]
   constructor(private router: Router){}
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
     this.currentRoute = this.router.url;
   }
 }
