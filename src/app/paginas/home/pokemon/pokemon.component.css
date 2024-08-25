@@ -1,0 +1,13 @@
+.bloque_perfil {
+    display: flex;
+}
+
+.bloque_imagenes {
+    width: 40%;
+    background-color: red;
+}
+
+.bloque_informacion {
+    width: 60%;
+    background-color: blue;
+}
