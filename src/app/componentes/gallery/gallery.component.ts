@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { GalleryModule, GalleryItem, ImageItem } from 'ng-gallery'
+import { CardsService } from '../../servicios/cartas/cartas.service';
 
 
 @Component({
@@ -10,19 +11,55 @@ import { GalleryModule, GalleryItem, ImageItem } from 'ng-gallery'
   styleUrl: './gallery.component.css'  
 })
 export class GalleryComponent implements OnInit {
-    public images: GalleryItem[] = [];
 
-    ngOnInit() {
-      // Set items array
-      this.images = [
+  @Input() arrayImages: any;
+
+  constructor (private cardService: CardsService) {}
+
+  public items: GalleryItem[] = [];
+
+  ngOnInit(): void {
+    this.cardService.getProducts("squirtle").subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.error('Error al obtener la información del producto:', error);
+      }
+    );
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['arrayImages']) {
+      this.items = [
         new ImageItem(
-            { src: 'https://levanova.es/wp-content/uploads/2023/05/Pan-rustico-de-Levanova-scaled.jpg', thumb: 'https://levanova.es/wp-content/uploads/2023/05/Pan-rustico-de-Levanova-scaled.jpg' }
+          { 
+            src: this.arrayImages.front_default,
+            thumb: this.arrayImages.front_default 
+          }
         ),
         new ImageItem(
-            { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Assorted_bread.jpg/640px-Assorted_bread.jpg', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Assorted_bread.jpg/640px-Assorted_bread.jpg' }
+          { 
+            src: this.arrayImages.back_default, 
+            thumb: this.arrayImages.back_default 
+          }
+        ),
+        new ImageItem(
+          { 
+            src: this.arrayImages.front_shiny, 
+            thumb: this.arrayImages.front_shiny 
+          }
+        ),
+        new ImageItem(
+          { 
+            src: this.arrayImages.back_shiny, 
+            thumb: this.arrayImages.back_shiny 
+          }
         ),
         // ... more items
       ];
     }
+  }
+
 
 }

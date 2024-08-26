@@ -10,8 +10,17 @@
     <div class="tipo">
       <app-types [tipos]="tipos"></app-types>
     </div>
-    <div class="nombre_pokemon text-[36px] text-white font-black uppercase pl-[6px]">{{ info.name }}</div>
-    <img *ngIf="!isHovered" style="filter: drop-shadow(2px 4px 6px black);" src="{{ info.sprites.front_default }}" alt="" class="h-full w-full object-cover object-center group-hover:opacity-75">
-    <img *ngIf="isHovered" src="{{ info.sprites.back_default }}" alt="" class="h-full w-full object-cover object-center group-hover:opacity-75">
+    <div class="nombre_pokemon text-[36px] text-white font-black uppercase pl-[6px]">
+      {{ info.name }}
+    </div>
+    <img *ngIf="!isHovered" 
+      style="filter: drop-shadow(2px 4px 6px black);" 
+      src="{{ info.sprites.front_default }}" 
+      alt="" 
+      class="h-full w-full object-cover object-center group-hover:opacity-75">
+    <img *ngIf="isHovered" 
+      src="{{ info.sprites.back_default }}" 
+      alt="" 
+      class="h-full w-full object-cover object-center group-hover:opacity-75">
   </div>
 </a> 

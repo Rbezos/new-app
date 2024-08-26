@@ -15,6 +15,7 @@ export class CardComponent implements OnInit {
   
   @Input() elemento: any;
   @Output() tipos: any[] = [];
+  @Output() arrayInfo: any[] = [];
   info: any;
 
   primaryColor: string = '';
@@ -37,6 +38,7 @@ export class CardComponent implements OnInit {
     this.productosService.getProducts(this.elemento.url).subscribe(
       data => {
         this.info = data;
+        this.arrayInfo = data;
         if(this.info.types.length >= 1) {
           this.primaryColor = this.productosService.getColorByType(this.info.types[0].type.name);
           this.tipos[0] = this.info.types[0].type;

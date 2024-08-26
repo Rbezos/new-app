@@ -14,7 +14,10 @@ import { GalleryComponent } from '../../../componentes/gallery/gallery.component
 export class PokemonComponent implements OnInit {
 
   constructor( private activatedRoute: ActivatedRoute, private productosService: ProductosService) {}
+
   @Output() tipos: any[] = [];
+  @Output() arrayImages: any[] = [];
+
   private url_info:string = "https://pokeapi.co/api/v2/pokemon/";
   private id:number = 0;
   info: any;
@@ -33,6 +36,8 @@ export class PokemonComponent implements OnInit {
     this.productosService.getProducts(this.url_info+this.id).subscribe(
       data => {
         this.info = data;
+        this.arrayImages = data.sprites;
+        console.log(data.sprites);
         if(this.info.types.length >= 1) {
           this.primaryColor = this.productosService.getColorByType(this.info.types[0].type.name);
           this.tipos[0] = this.info.types[0].type;
