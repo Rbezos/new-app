@@ -1,16 +1,31 @@
 <div class="contenedor_paginacion">
     <div class="filtros">Filtros</div>
     <div class="bloque_paginacion">
-        <div (click)="cambiarPagina(1)" class="elemento_paginacion" *ngIf="pagina_actual >= 4">...</div>
-        <div 
-        (click)="cambiarPagina(pagina)" 
-        [ngClass]="{'active': pagina === pagina_actual}" 
-        class="elemento_paginacion" 
-        *ngFor="let pagina of paginas">{{ pagina }}</div>
-        <div (click)="cambiarPagina(num_paginas)" class="elemento_paginacion" *ngIf="pagina_actual != num_paginas">...</div>
+        <div [routerLink]="['/cuadro',1]"
+            class="elemento_paginacion" 
+            *ngIf="pagina_actual >= 4">
+            ...
+        </div>
+        <div [routerLink]="['/cuadro',pagina]" 
+            [ngClass]="{'active': pagina === pagina_actual}" 
+            class="elemento_paginacion" 
+            *ngFor="let pagina of paginas">
+            {{ pagina }}
+        </div>
+        <div [routerLink]="['/cuadro',num_paginas]"  
+            class="elemento_paginacion" 
+            *ngIf="pagina_actual != num_paginas">
+            ...
+        </div>
     </div>
     <div class="cambio_vista">
-        <div class="mosaico" (click)="cambiarVista(1)">Mosaico</div>
-        <div class="listado" (click)="cambiarVista(2)">Listado</div>
+        <div class="mosaico" 
+            (click)="cambiarVista(1)">
+            Mosaico
+        </div>
+        <div class="listado" 
+            (click)="cambiarVista(2)">
+            Listado
+        </div>
     </div>
 </div>

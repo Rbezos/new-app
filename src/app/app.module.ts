@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';  
-import { NgxGalleryModule } from 'ngx-gallery';
 
 
 @NgModule({
@@ -16,8 +15,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule,
-    NgxGalleryModule
+    BrowserAnimationsModule
   ],
   providers: [],   
   bootstrap: [AppComponent]

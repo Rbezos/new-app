@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Output, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataSharingService } from '../../servicios/data-sharing/data-sharing.service';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-paginacion',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './paginacion.component.html',
   styleUrl: './paginacion.component.css'
 })
@@ -20,18 +20,22 @@ export class PaginacionComponent implements OnInit {
   @Input() numPokemon: any;
   @Output() vista = new EventEmitter<number>();
 
-  constructor(private dataSharingService: DataSharingService) { }
+  constructor( private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit(): void {
-    this.num_paginas = Math.ceil(1302 / this.num_elementos);
-    this.generatePaginacion();
+    this.activatedRoute.params
+      .subscribe( params => {
+        this.pagina_actual = params['page'];
+        this.num_paginas = Math.ceil(1302 / this.num_elementos);
+        this.generatePaginacion();
+      })
   }
 
   generatePaginacion(): void {
     this.paginas = [];
     
     this.pagina_actual = Math.max(1, Math.min(this.pagina_actual, this.num_paginas));
-
+    console.log(this.pagina_actual);
     let inicio = Math.max(1, this.pagina_actual - 2);
     let fin = Math.min(this.num_paginas, this.pagina_actual + 2);
 
@@ -49,7 +53,6 @@ export class PaginacionComponent implements OnInit {
   }
   cambiarPagina(pagina: number): void {
     this.pagina_actual = pagina;
-    this.dataSharingService.changeData([this.pagina_actual, this.num_elementos]);
     this.generatePaginacion();
   }
 

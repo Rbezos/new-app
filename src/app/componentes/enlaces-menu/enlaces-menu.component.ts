@@ -15,7 +15,7 @@ export class EnlacesMenuComponent implements OnInit{
   currentRoute: string = '';
 
   public enlaces = [
-    {name: 'Pokedex', route: '/cuadro'}
+    {name: 'Pokedex', route: '/cuadro/1'}
   ]
   constructor(private router: Router){}
 

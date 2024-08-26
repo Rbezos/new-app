@@ -3,7 +3,7 @@ import { CabeceraComponent } from '../../../componentes/cabecera/cabecera.compon
 import { MosaicoComponent } from '../../../componentes/mosaico/mosaico.component';
 import { ProductosService } from '../../../servicios/produtos/productos.service';
 import { PaginacionComponent } from '../../../componentes/paginacion/paginacion.component';
-import { DataSharingService } from '../../../servicios/data-sharing/data-sharing.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cuadro',
@@ -14,15 +14,21 @@ import { DataSharingService } from '../../../servicios/data-sharing/data-sharing
 })
 export class CuadroComponent implements OnInit {
 
+  constructor(
+    private productosService: ProductosService, 
+    private activatedRoute: ActivatedRoute
+  ){}
+
   public data: any;
-  private arrayPaginas: any[] = [];
-  constructor(private productosService: ProductosService, private dataSharingService: DataSharingService){}
+  public paginaActual: number = 1;
+  public limiteElementos: number = 12;
 
   ngOnInit(): void {
-    this.dataSharingService.currentData.subscribe((data) => {
-      this.arrayPaginas = data;
-      this.getDataFromApi(this.arrayPaginas[0], this.arrayPaginas[1]);
-    })
+    this.activatedRoute.params
+      .subscribe ( params => {
+        this.paginaActual = params['page'];
+        this.getDataFromApi(this.paginaActual, this.limiteElementos);
+      })
   }
 
   getDataFromApi(page: number = 1, limit: number = 12):void {
