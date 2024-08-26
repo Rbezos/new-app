@@ -2,11 +2,12 @@ import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductosService } from '../../../servicios/produtos/productos.service';
 import { CabeceraComponent } from '../../../componentes/cabecera/cabecera.component';
+import { GalleryComponent } from '../../../componentes/gallery/gallery.component';
 
 @Component({
   selector: 'app-pokemon',
   standalone: true,
-  imports: [CabeceraComponent],
+  imports: [CabeceraComponent, GalleryComponent],
   templateUrl: './pokemon.component.html',
   styleUrl: './pokemon.component.css'
 })
