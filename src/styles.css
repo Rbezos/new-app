@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.g-slider gallery-thumb gallery-image[imageState=success], .g-slider gallery-item gallery-image[imageState=success] {
+    background: white !important;
+}
+
+gallery-core[thumbPosition=bottom] {
+    background: white !important;
+}

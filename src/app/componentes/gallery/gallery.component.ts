@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { GalleryModule, GalleryItem, ImageItem } from 'ng-gallery'
-import { CardsService } from '../../servicios/cartas/cartas.service';
+
 
 
 @Component({
@@ -14,23 +14,16 @@ export class GalleryComponent implements OnInit {
 
   @Input() arrayImages: any;
 
-  constructor (private cardService: CardsService) {}
+  constructor () {}
 
   public items: GalleryItem[] = [];
 
   ngOnInit(): void {
-    this.cardService.getProducts("squirtle").subscribe(
-      data => {
-        console.log(data);
-      },
-      error => {
-        console.error('Error al obtener la información del producto:', error);
-      }
-    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['arrayImages']) {
+    console.log(this.arrayImages);
+    if (changes['arrayImages'] && this.arrayImages.length > 0) {
       this.items = [
         new ImageItem(
           { 
@@ -52,11 +45,10 @@ export class GalleryComponent implements OnInit {
         ),
         new ImageItem(
           { 
-            src: this.arrayImages.back_shiny, 
-            thumb: this.arrayImages.back_shiny 
+            src: this.arrayImages[0].back_shiny, 
+            thumb: this.arrayImages[0].back_shiny 
           }
-        ),
-        // ... more items
+        )
       ];
     }
   }

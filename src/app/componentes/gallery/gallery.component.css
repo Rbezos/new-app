@@ -1,3 +1,3 @@
-.gallery-container {
-    background-color: #f0f0f0;
+.g-slider gallery-thumb gallery-image[imageState=success], .g-slider gallery-item gallery-image[imageState=success] {
+    background: red !important;
 }
