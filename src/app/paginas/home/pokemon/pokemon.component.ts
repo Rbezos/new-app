@@ -23,9 +23,8 @@ export class PokemonComponent implements OnInit {
 
   @Output() tipos: any[] = [];
   @Output() arrayImages: any[] = [];
-  @Output() arrayCards: any[] = [];
+  @Output() pokemonInfo: any[] = [];
 
-  private namePokemon: string = '';
   private url_info:string = "https://pokeapi.co/api/v2/pokemon/";
   private id:number = 0;
   info: any;
@@ -44,8 +43,7 @@ export class PokemonComponent implements OnInit {
     this.productosService.getProducts(this.url_info+this.id).subscribe(
       data => {
         this.info = data;
-        this.arrayImages = data.sprites;
-        this.namePokemon = data.name;
+        this.arrayImages = [data.sprites];
         if(this.info.types.length >= 1) {
           this.primaryColor = this.productosService.getColorByType(this.info.types[0].type.name);
           this.tipos[0] = this.info.types[0].type;
@@ -60,21 +58,15 @@ export class PokemonComponent implements OnInit {
         } else {
           this.secondaryColor = this.primaryColor;
         }
+        this.pokemonInfo = [
+          {'name': data.name},
+          {'primary': this.primaryColor},
+          {'secondary': this.secondaryColor}
+        ];
       },
       error => {
         console.error('Error al obtener la información del producto:', error);
       }
     );
   }
-  getInfoCards(): void {
-    this.cardsService.getProducts(this.namePokemon).subscribe(
-      data => {
-        console.log(data);
-      },
-      error => {
-        console.error('Error al obtener la información del producto:', error);
-      }
-    );
-  }
-
 }

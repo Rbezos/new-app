@@ -1,0 +1,11 @@
+.loading {
+    display: flex;
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+    color: white;
+    text-transform: uppercase;
+    font-size: 19px;
+    font-weight: 700;
+    align-items: center;
+}

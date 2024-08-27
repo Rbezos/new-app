@@ -1,1 +1,13 @@
-<p>slider-cards works!</p>
+
+<div *ngIf="error">{{ error }}</div>
+
+<div #sliderRef 
+  class="keen-slider" 
+  style="padding: 32px 0px;" 
+  [style.background]="gradientStyle">
+  <div *ngIf="isLoading" class="loading">Loading...</div>
+  <div class="keen-slider__slide" *ngFor="let card of arrayCards">
+    <!-- Display card content here -->
+    <img [src]="card" [alt]="card">
+  </div>
+</div>

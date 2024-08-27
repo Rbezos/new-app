@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GalleryModule, GalleryItem, ImageItem } from 'ng-gallery'
 
 
@@ -10,7 +10,7 @@ import { GalleryModule, GalleryItem, ImageItem } from 'ng-gallery'
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.css'  
 })
-export class GalleryComponent implements OnInit {
+export class GalleryComponent implements OnChanges {
 
   @Input() arrayImages: any;
 
@@ -18,29 +18,25 @@ export class GalleryComponent implements OnInit {
 
   public items: GalleryItem[] = [];
 
-  ngOnInit(): void {
-  }
-
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.arrayImages);
     if (changes['arrayImages'] && this.arrayImages.length > 0) {
       this.items = [
         new ImageItem(
           { 
-            src: this.arrayImages.front_default,
-            thumb: this.arrayImages.front_default 
+            src: this.arrayImages[0].front_default,
+            thumb: this.arrayImages[0].front_default 
           }
         ),
         new ImageItem(
           { 
-            src: this.arrayImages.back_default, 
-            thumb: this.arrayImages.back_default 
+            src: this.arrayImages[0].back_default, 
+            thumb: this.arrayImages[0].back_default 
           }
         ),
         new ImageItem(
           { 
-            src: this.arrayImages.front_shiny, 
-            thumb: this.arrayImages.front_shiny 
+            src: this.arrayImages[0].front_shiny, 
+            thumb: this.arrayImages[0].front_shiny 
           }
         ),
         new ImageItem(

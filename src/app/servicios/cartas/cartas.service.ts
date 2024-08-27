@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,27 +10,42 @@ export class CardsService {
 
   private url = 'https://api.pokemontcg.io/v2/cards?q=name:';
   private cache = new Map<string, any>();
-  private numPokemons = new Map<string, number>();  // Cambiar a Map<string, number>
 
   constructor(private http: HttpClient) { }
 
   getProducts(pokemon: string): Observable<any> {
-    if (this.cache.has(pokemon)) {
-      return of(this.cache.get(pokemon));
+    const cacheKey = `${pokemon}`;
+  
+    if (this.cache.has(cacheKey)) {
+      return of(this.cache.get(cacheKey));
     }
-
-    return this.http.get<any>(`${this.url}${pokemon}`).pipe(
-      tap(response => this.cache.set(pokemon, response))
+  
+    const finalUrl = `${this.url}${pokemon}`;
+  
+    return this.http.get<any>(finalUrl).pipe(
+      tap(data => {
+        console.log('API Response:', data);
+        this.cache.set(cacheKey, data);
+      })
     );
   }
 
-  getPokemonSearchCount(pokemon: string): number {
-    return this.numPokemons.get(pokemon) || 0;  // Usar pokemon como clave de tipo string
-  }
-
-  incrementPokemonSearchCount(pokemon: string): void {
-    const count = this.getPokemonSearchCount(pokemon);
-    this.numPokemons.set(pokemon, count + 1);  // Usar pokemon como clave de tipo string
+  getImagesCards(pokemon: string): Observable<any> {
+    return this.getProducts(pokemon).pipe(
+      map(data => {
+        // Adjust according to actual API response structure
+        const arrayImages: any[] = [];
+        // Assuming data is directly an array or an object containing cards
+        if (data && data.data && Array.isArray(data.data)) {
+          for (const value of data.data) {
+            if (value.images && value.images.small) {
+              arrayImages.push(value.images.small);
+            }
+          }
+        }
+        return arrayImages;
+      })
+    );
   }
 
 }
